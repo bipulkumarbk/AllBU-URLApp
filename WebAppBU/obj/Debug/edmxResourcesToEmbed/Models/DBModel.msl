@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ClientManagementModelStoreContainer" CdmEntityContainer="ClientManagementEntities">
+    <EntitySetMapping Name="BusinessUnits">
+      <EntityTypeMapping TypeName="ClientManagementModel.BusinessUnit">
+        <MappingFragment StoreEntitySet="BusinessUnit">
+          <ScalarProperty Name="BusinessUnitID" ColumnName="BusinessUnitID" />
+          <ScalarProperty Name="ParentBusinessUnitID" ColumnName="ParentBusinessUnitID" />
+          <ScalarProperty Name="BusinessUnitName" ColumnName="BusinessUnitName" />
+          <ScalarProperty Name="BusinessUnitSystemName" ColumnName="BusinessUnitSystemName" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="BillingCustomerID" ColumnName="BillingCustomerID" />
+          <ScalarProperty Name="BusinessUnitTypeID" ColumnName="BusinessUnitTypeID" />
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="IsHttps" ColumnName="IsHttps" />
+          <ScalarProperty Name="Origin" ColumnName="Origin" />
+          <ScalarProperty Name="OriginKey" ColumnName="OriginKey" />
+          <ScalarProperty Name="ModifiedByUserID" ColumnName="ModifiedByUserID" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BusinessUnitUrls">
+      <EntityTypeMapping TypeName="ClientManagementModel.BusinessUnitUrl">
+        <MappingFragment StoreEntitySet="BusinessUnitUrl">
+          <ScalarProperty Name="BusinessUnitID" ColumnName="BusinessUnitID" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+          <ScalarProperty Name="ModifiedByUserID" ColumnName="ModifiedByUserID" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

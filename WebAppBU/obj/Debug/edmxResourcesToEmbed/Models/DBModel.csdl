@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClientManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BusinessUnit">
+    <Key>
+      <PropertyRef Name="BusinessUnitID" />
+    </Key>
+    <Property Name="BusinessUnitID" Type="Int64" Nullable="false" />
+    <Property Name="ParentBusinessUnitID" Type="Int64" />
+    <Property Name="BusinessUnitName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BusinessUnitSystemName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="BillingCustomerID" Type="Int32" />
+    <Property Name="BusinessUnitTypeID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileID" Type="Int64" />
+    <Property Name="AddressID" Type="Int64" />
+    <Property Name="IsHttps" Type="Boolean" Nullable="false" />
+    <Property Name="Origin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OriginKey" Type="Int32" />
+    <Property Name="ModifiedByUserID" Type="Int64" />
+    <Property Name="ValidFrom" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="ValidTo" Type="DateTime" Nullable="false" Precision="7" />
+    <NavigationProperty Name="BusinessUnit1" Relationship="Self.FK_BusinessUnit_BusinessUnit" FromRole="BusinessUnit" ToRole="BusinessUnit1" />
+    <NavigationProperty Name="BusinessUnit2" Relationship="Self.FK_BusinessUnit_BusinessUnit" FromRole="BusinessUnit1" ToRole="BusinessUnit" />
+    <NavigationProperty Name="BusinessUnitUrls" Relationship="Self.FK_BusinessUnitUrl_BusinessUnitID" FromRole="BusinessUnit" ToRole="BusinessUnitUrl" />
+  </EntityType>
+  <EntityType Name="BusinessUnitUrl">
+    <Key>
+      <PropertyRef Name="Url" />
+      <PropertyRef Name="ApplicationID" />
+    </Key>
+    <Property Name="BusinessUnitID" Type="Int64" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApplicationID" Type="Int64" Nullable="false" />
+    <Property Name="ModifiedByUserID" Type="Int64" />
+    <Property Name="ValidFrom" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="ValidTo" Type="DateTime" Nullable="false" Precision="7" />
+    <NavigationProperty Name="BusinessUnit" Relationship="Self.FK_BusinessUnitUrl_BusinessUnitID" FromRole="BusinessUnitUrl" ToRole="BusinessUnit" />
+  </EntityType>
+  <Association Name="FK_BusinessUnit_BusinessUnit">
+    <End Role="BusinessUnit" Type="Self.BusinessUnit" Multiplicity="0..1" />
+    <End Role="BusinessUnit1" Type="Self.BusinessUnit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BusinessUnit">
+        <PropertyRef Name="BusinessUnitID" />
+      </Principal>
+      <Dependent Role="BusinessUnit1">
+        <PropertyRef Name="ParentBusinessUnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessUnitUrl_BusinessUnitID">
+    <End Role="BusinessUnit" Type="Self.BusinessUnit" Multiplicity="1" />
+    <End Role="BusinessUnitUrl" Type="Self.BusinessUnitUrl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BusinessUnit">
+        <PropertyRef Name="BusinessUnitID" />
+      </Principal>
+      <Dependent Role="BusinessUnitUrl">
+        <PropertyRef Name="BusinessUnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ClientManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BusinessUnits" EntityType="Self.BusinessUnit" />
+    <EntitySet Name="BusinessUnitUrls" EntityType="Self.BusinessUnitUrl" />
+    <AssociationSet Name="FK_BusinessUnit_BusinessUnit" Association="Self.FK_BusinessUnit_BusinessUnit">
+      <End Role="BusinessUnit" EntitySet="BusinessUnits" />
+      <End Role="BusinessUnit1" EntitySet="BusinessUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessUnitUrl_BusinessUnitID" Association="Self.FK_BusinessUnitUrl_BusinessUnitID">
+      <End Role="BusinessUnit" EntitySet="BusinessUnits" />
+      <End Role="BusinessUnitUrl" EntitySet="BusinessUnitUrls" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
